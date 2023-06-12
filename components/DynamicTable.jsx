@@ -1,138 +1,164 @@
-import React, { useState } from "react";
-import { Table, Button, Form, Stack } from "react-bootstrap";
-import DynamicPagination from "./DynamicPagination";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import styles from "../Style.module.css/Table.module.css";
+import * as React from 'react';
+import { styled } from '@mui/system';
+import TablePagination, {
+  tablePaginationClasses as classes,
+} from '@mui/base/TablePagination';
 
-const DynamicTable = ({ data, handleDetailsClick }) => {
-  const DEFAULT_ITEMS_PER_PAGE = 15;
-  const [tableData, setTableData] = useState(data);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE); 
-  const leadKeys = tableData && tableData[0];
+export default function UnstyledTable() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const handleDeleteRow = (rowIndex) => {
-    const newData = [...tableData];
-    newData.splice(rowIndex, 1);
-    setTableData(newData);
+  // Avoid a layout jump when reaching the last page with empty rows.
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
   };
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  const handleItemsPerPageChange = (e) => {
-    setItemsPerPage(parseInt(e.target.value));
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   return (
-    <>
-      <Stack gap={3}>
-        <Form.Group controlId="formGridItemsPerPage">
-          <Form.Label>Items per page</Form.Label>
-          <Form.Select value={itemsPerPage} onChange={handleItemsPerPageChange} className={styles.tableSelect} >
-            <option value="5">5 rows per page</option>
-            <option value="10">10 rows per page</option>
-            <option value="15">15 rows per page</option>
-            <option value="20">20 rows per page</option>
-          </Form.Select>
-        </Form.Group>
-        {leadKeys ? (
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr className={styles.headerFont}>
-              {Object.keys(leadKeys).map((key, index) => {
-                return (
-                  <th key={index} style={{ textAlign: "center" }}>
-                    {key}
-                  </th>
-                );
-              })}
+    <Root sx={{ maxWidth: '100%', width: 500 }}>
+      <table aria-label="custom pagination table">
+        <thead>
+          <tr>
+            <th>Dessert</th>
+            <th>Calories</th>
+            <th>Fat</th>
+          </tr>
+        </thead>
+        <tbody>
+          {(rowsPerPage > 0
+            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : rows
+          ).map((row) => (
+            <tr key={row.name}>
+              <td>{row.name}</td>
+              <td style={{ width: 160 }} align="right">
+                {row.calories}
+              </td>
+              <td style={{ width: 160 }} align="right">
+                {row.fat}
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {tableData
-              .slice(
-                (currentPage - 1) * itemsPerPage,
-                (currentPage - 1) * itemsPerPage + itemsPerPage
-              )
-              .map((row, rowIndex) => (
-                <tr key={rowIndex}>
-                  {Object.keys(row).map((lead, columnIndex) => (
-                    <td key={columnIndex} contentEditable={false} value={row[lead]} >
-                      {row[lead] === true ? (
-                        <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#06d6a0" }} />
-                      ) : row[lead] === false ? (
-                        <FontAwesomeIcon icon={faCircleXmark} style={{ color: "#ef476f" }} />
-                      ) :
-                        row[lead]
-                      }
-                    </td>
-                  ))}
-                  <td>
-                    <div className="d-flex gap-1">
-                      <Button
-                        type="button"
-                        className={`btn btn-primary ${styles.widthBtn} ${styles.button}`}
-                        style={{
-                          backgroundColor: "#6b3fa0",
-                          color: "#fae206",
-                          borderColor: "#000000",
-                          transition: "background-color 0.2s, color 0.2s"
-                        }}
-                        onMouseOver={(e) => {
-                          e.target.style.backgroundColor = "#f0f5fa";
-                          e.target.style.color = "#6b3fa0";
-                        }}
-                        onMouseOut={(e) => {
-                          e.target.style.backgroundColor = "#6b3fa0";
-                          e.target.style.color = "#fae206";
-                        }}
-                        onClick={() => handleDetailsClick(row)}
-                      >
-                        Details
-                      </Button>
-                      <Button
-                        type="button"
-                        className={`btn btn-primary ${styles.widthBtn} ${styles.button}`}
-                        style={{
-                          backgroundColor: "#f0f5fa",
-                          border: "2px solid #6b3fa0",
-                          color: "#6b3fa0",
-                          borderColor: "#000000",
-                          transition: "background-color 0.2s, color 0.2s"
-                        }}
-                        onMouseOver={(e) => {
-                          e.target.style.backgroundColor = "#6b3fa0";
-                          e.target.style.color = "#f0f5fa";
-                        }}
-                        onMouseOut={(e) => {
-                          e.target.style.backgroundColor = "#f0f5fa";
-                          e.target.style.color = "#6b3fa0";
-                        }}
-                        onClick={() => handleDeleteRow(rowIndex)}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </Table>
-        ): 
-        <p>You don't seem to have any leads yet. Try adding one</p>
-        }
-        <DynamicPagination
-        totalItems={tableData && tableData.length}
-        itemsPerPage={itemsPerPage}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-        />
-      </Stack>
-    </>
+          ))}
+
+          {emptyRows > 0 && (
+            <tr style={{ height: 41 * emptyRows }}>
+              <td colSpan={3} />
+            </tr>
+          )}
+        </tbody>
+        <tfoot>
+          <tr>
+            <CustomTablePagination
+              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+              colSpan={3}
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              slotProps={{
+                select: {
+                  'aria-label': 'rows per page',
+                },
+                actions: {
+                  showFirstButton: true,
+                  showLastButton: true,
+                },
+              }}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </tr>
+        </tfoot>
+      </table>
+    </Root>
   );
+}
+
+function createData(name, calories, fat) {
+  return { name, calories, fat };
+}
+
+const rows = [
+  createData('Cupcake', 305, 3.7),
+  createData('Donut', 452, 25.0),
+  createData('Eclair', 262, 16.0),
+  createData('Frozen yoghurt', 159, 6.0),
+  createData('Gingerbread', 356, 16.0),
+  createData('Honeycomb', 408, 3.2),
+  createData('Ice cream sandwich', 237, 9.0),
+  createData('Jelly Bean', 375, 0.0),
+  createData('KitKat', 518, 26.0),
+  createData('Lollipop', 392, 0.2),
+  createData('Marshmallow', 318, 0),
+  createData('Nougat', 360, 19.0),
+  createData('Oreo', 437, 18.0),
+].sort((a, b) => (a.calories < b.calories ? -1 : 1));
+
+const grey = {
+  200: '#d0d7de',
+  800: '#32383f',
+  900: '#24292f',
 };
 
-export default DynamicTable;
+const Root = styled('div')(
+  ({ theme }) => `
+  table {
+    font-family: IBM Plex Sans, sans-serif;
+    font-size: 0.875rem;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[200]};
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  }
+  `,
+);
+
+const CustomTablePagination = styled(TablePagination)`
+  & .${classes.toolbar} {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  & .${classes.selectLabel} {
+    margin: 0;
+  }
+
+  & .${classes.displayedRows} {
+    margin: 0;
+
+    @media (min-width: 768px) {
+      margin-left: auto;
+    }
+  }
+
+  & .${classes.spacer} {
+    display: none;
+  }
+
+  & .${classes.actions} {
+    display: flex;
+    gap: 0.25rem;
+  }
+`;

@@ -9,7 +9,7 @@ import Photo from "@/components/Photo";
 
 const data = [
   {
-    image: "path/to/image1.jpg",
+    image: "/image1.jpg",
     alt: "Card 1 image",
     title: "Card 1 title",
     description: "Card 1 description",
@@ -48,7 +48,7 @@ export default function Home() {
       <CssBaseline />
       <Navbar />
       <Container className="d-flex flex-column">
-        <Photo width="100%" height="15rem" alt="header" src="../public/hero.jpg"/>
+        <Photo width="100%" height="200rem" alt="header" src="/hero.jpg"/>
         <UnstyledTable />
         {Array.from({ length: row }).map((_, rowIndex) => (
           <Row key={rowIndex} className="w-100">

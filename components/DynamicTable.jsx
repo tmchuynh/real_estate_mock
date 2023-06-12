@@ -1,4 +1,8 @@
 import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/system';
 import TablePagination, {
   tablePaginationClasses as classes,
@@ -45,20 +49,20 @@ export default function UnstyledTable({rows}) {
 
   return (
     <Root sx={{ maxWidth: '100%', width: 500 }}>
-      <table aria-label="custom pagination table">
-        <thead>
-          <tr>
+      <Table stickyHeader aria-label="custom sticky pagination table">
+        <TableHead>
+          <TableRow>
             <th>Dessert</th>
             <th>Calories</th>
             <th>Fat</th>
-          </tr>
-        </thead>
-        <tbody>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <tr key={row.name}>
+            <TableRow key={row.name}>
               <td>{row.name}</td>
               <td style={{ width: 160 }} align="right">
                 {row.calories}
@@ -66,17 +70,17 @@ export default function UnstyledTable({rows}) {
               <td style={{ width: 160 }} align="right">
                 {row.fat}
               </td>
-            </tr>
+            </TableRow>
           ))}
 
           {emptyRows > 0 && (
-            <tr style={{ height: 41 * emptyRows }}>
+            <TableRow style={{ height: 41 * emptyRows }}>
               <td colSpan={3} />
-            </tr>
+            </TableRow>
           )}
-        </tbody>
+        </TableBody>
         <tfoot>
-          <tr>
+          <TableRow>
             <CustomTablePagination
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
               colSpan={3}
@@ -95,9 +99,9 @@ export default function UnstyledTable({rows}) {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
-          </tr>
+          </TableRow>
         </tfoot>
-      </table>
+      </Table>
     </Root>
   );
 }

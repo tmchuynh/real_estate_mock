@@ -1,4 +1,4 @@
-import UnstyledTable from "@/components/UnstyledTable";
+import EnhancedTable from "@/components/EnhancedTable";
 import Navbar from "@/components/Navbar";
 import { Col, Container, Row } from 'react-bootstrap'
 import CustomCard from "@/components/CustomCard";
@@ -49,7 +49,7 @@ export default function Home() {
       <Navbar />
       <Container className="d-flex flex-column">
         <Photo width="100%" height="200rem" alt="header" src="/hero.jpg"/>
-        <UnstyledTable />
+        <EnhancedTable />
         {Array.from({ length: row }).map((_, rowIndex) => (
           <Row key={rowIndex} className="w-100">
             {data.slice(rowIndex * 4, (rowIndex + 1) * 4).map((item, index) => (

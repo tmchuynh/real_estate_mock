@@ -5,10 +5,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import StandaloneToggleButton from './ToggleHeart';
 
 const CustomCard = (props) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
+      <StandaloneToggleButton />
       <CardMedia
         sx={{ height: 140 }}
         image={props.image}

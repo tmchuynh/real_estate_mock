@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import CustomCard from "@/components/CustomCard";
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
+import Photo from "@/components/Photo";
 
 
 const data = [
@@ -47,6 +48,7 @@ export default function Home() {
       <CssBaseline />
       <Navbar />
       <Container className="d-flex flex-column">
+        <Photo width="100%" height="15rem" alt="header" src="../public/hero.jpg"/>
         <UnstyledTable />
         {Array.from({ length: row }).map((_, rowIndex) => (
           <Row key={rowIndex} className="w-100">

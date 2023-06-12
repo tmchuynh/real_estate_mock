@@ -139,6 +139,7 @@ export default function Navbar() {
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
                 }}
+                href="/login"
               >
                 <ListItemIcon
                   sx={{

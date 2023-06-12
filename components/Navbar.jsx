@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -82,8 +80,6 @@ export default function Navbar() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
       <Drawer variant="permanent" open={open}>
 
         <DrawerHeader>
@@ -153,6 +149,5 @@ export default function Navbar() {
           </ListItem>
         </List>
       </Drawer>
-    </Box>
   );
 }

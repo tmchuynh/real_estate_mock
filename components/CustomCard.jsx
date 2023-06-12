@@ -9,7 +9,7 @@ import StandaloneToggleButton from './ToggleHeart';
 
 const CustomCard = (props) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 345 }} style={{margin: "1rem"}}>
       <StandaloneToggleButton />
       <CardMedia
         sx={{ height: 140 }}

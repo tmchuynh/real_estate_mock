@@ -89,8 +89,9 @@ export default function Navbar() {
     <Drawer variant="permanent" open={open}>
 
       <DrawerHeader>
-        <IconButton className='closeButton' onClick={handleDrawerClose} style={{ visibility: "hidden" }}>
+        <IconButton className='closeButton' onClick={handleDrawerClose} style={{ visibility: "hidden",position: "absolute", left: "1rem" }}>
           {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          
         </IconButton>
 
         <IconButton

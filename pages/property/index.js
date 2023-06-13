@@ -23,28 +23,28 @@ export default function PropertyDetails() {
     function calculateDistance(lat1, lon1, lat2, lon2) {
         const earthRadiusKm = 6371; // Earth's radius in kilometers
         const milesPerKm = 0.621371; // Conversion factor from kilometers to miles
-      
+
         // Convert latitude and longitude from degrees to radians
         const latRad1 = (Math.PI / 180) * lat1;
         const lonRad1 = (Math.PI / 180) * lon1;
         const latRad2 = (Math.PI / 180) * lat2;
         const lonRad2 = (Math.PI / 180) * lon2;
-      
+
         // Calculate the differences between the latitude and longitude of the two points
         const dLat = latRad2 - latRad1;
         const dLon = lonRad2 - lonRad1;
-      
+
         // Apply the Haversine formula to calculate the distance
         const a =
-          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-          Math.cos(latRad1) * Math.cos(latRad2) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(latRad1) * Math.cos(latRad2) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         const distanceKm = earthRadiusKm * c;
         const distanceMiles = distanceKm * milesPerKm;
-      
+
         return distanceMiles;
-      }
-      // 32.59 instead of 42.8
+    }
+    // 32.59 instead of 42.8
     const distance = calculateDistance(34.0780618, -117.3678268, 33.9594863, -117.9187241)
 
     return (

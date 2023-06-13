@@ -14,6 +14,7 @@ export default function Users() {
     });
   }, []);
 
+  // WOULD BE THE TABLE RENDERING WITH ALL THE INFO FROM THE DATABASE
   return (
     <div>
       <h1>Properties</h1>

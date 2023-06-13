@@ -1,7 +1,6 @@
 import EnhancedTable from "@/components/EnhancedTable";
 import Navbar from "@/components/Navbar";
-import { Col, Container, Row } from 'react-bootstrap'
-import CustomCard from "@/components/CustomCard";
+import { Container } from 'react-bootstrap'
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Photo from "@/components/Photo";
@@ -41,8 +40,6 @@ const data = [
 
 
 export default function Home() {
-  const row = (Math.ceil(data.length % 4)) == 0 ? Math.ceil(data.length / 4) : Math.ceil(data.length / 3);
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />

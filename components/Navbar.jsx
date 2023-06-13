@@ -66,13 +66,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function Navbar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const pathname = window.location.pathname;
 
   const handleDrawerOpen = () => {
     const closeButton = document.getElementsByClassName("closeButton")[0];
     closeButton.style.visibility = "visible";
 
-    const table = document.getElementsByClassName("enhancedTable")[0];
-    table.style.width = "85vw";
+    if (pathname === "/") {
+      const table = document.getElementsByClassName("enhancedTable")[0];
+      table.style.width = "85vw";
+    }
     setOpen(true);
   };
 
@@ -80,8 +83,10 @@ export default function Navbar() {
     const closeButton = document.getElementsByClassName("closeButton")[0];
     closeButton.style.visibility = "hidden";
 
-    const table = document.getElementsByClassName("enhancedTable")[0];
-    table.style.width = "95vw";
+    if (pathname === "/") {
+      const table = document.getElementsByClassName("enhancedTable")[0];
+      table.style.width = "95vw";
+    }
     setOpen(false);
   };
 
@@ -89,9 +94,9 @@ export default function Navbar() {
     <Drawer variant="permanent" open={open}>
 
       <DrawerHeader>
-        <IconButton className='closeButton' onClick={handleDrawerClose} style={{ visibility: "hidden",position: "absolute", left: "1rem" }}>
+        <IconButton className='closeButton' onClick={handleDrawerClose} style={{ visibility: "hidden", position: "absolute", left: "1rem" }}>
           {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          
+
         </IconButton>
 
         <IconButton

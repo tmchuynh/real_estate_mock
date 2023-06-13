@@ -13,7 +13,7 @@ export default function ReorderDemo() {
         { field: 'category', header: 'Category' },
         { field: 'quantity', header: 'Quantity' }
     ];
-    
+
     const [products, setProducts] = useState([]);
     const [visibleColumns, setVisibleColumns] = useState(columns);
 
@@ -31,7 +31,7 @@ export default function ReorderDemo() {
 
     return (
         <div className="card">
-            <DataTable value={products} header={header} reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)} tableStyle={{ minWidth: '50rem' }}>
+            <DataTable value={products} header={header} rows={5} rowsPerPageOptions={[5, 10, 25, 50]} paginator reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)} tableStyle={{ minWidth: '50rem' }}>
                 <Column rowReorder style={{ width: '3rem' }} />
                 {visibleColumns.map((col) => (
                     <Column key={col.field} field={col.field} header={col.header} />

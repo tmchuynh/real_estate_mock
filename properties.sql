@@ -7,6 +7,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema property_search
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `property_search` ;
 
 -- -----------------------------------------------------
 -- Schema property_search
@@ -17,6 +18,8 @@ USE `property_search` ;
 -- -----------------------------------------------------
 -- Table `property_search`.`properties`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `property_search`.`properties` ;
+
 CREATE TABLE IF NOT EXISTS `property_search`.`properties` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `address` VARCHAR(45) NOT NULL,
@@ -26,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `property_search`.`properties` (
   `sqft` INT NOT NULL,
   `status` VARCHAR(45) NULL DEFAULT 'new',
   `isJaylinFriendly` TINYINT NOT NULL DEFAULT 0,
+  `url` VARCHAR(600) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 

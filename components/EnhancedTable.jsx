@@ -16,7 +16,9 @@ import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { visuallyHidden } from '@mui/utils';
+import InfoIcon from '@mui/icons-material/Info';
 import theme from '@/styles/theme';
+import Link from 'next/link';
 
 function createData(address, rooms, baths, sqft, jaylinFriendly, status) {
   return {
@@ -113,7 +115,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { order, orderBy, rowCount, onRequestSort } =
+  const { order, orderBy, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -122,7 +124,6 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -144,6 +145,7 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell></TableCell>
       </TableRow>
     </TableHead>
   );
@@ -157,7 +159,6 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(_props) {
-
   return (
     <Toolbar
       sx={{
@@ -180,8 +181,6 @@ function EnhancedTableToolbar(_props) {
   );
 }
 
-
-
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -194,7 +193,6 @@ export default function EnhancedTable() {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-
 
   const handleChangePage = (_event, newPage) => {
     setPage(newPage);
@@ -209,7 +207,6 @@ export default function EnhancedTable() {
     setDense(event.target.checked);
   };
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
@@ -222,8 +219,9 @@ export default function EnhancedTable() {
     [order, orderBy, page, rowsPerPage],
   );
 
+
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box className="enhancedTable" sx={{ width: '95vw' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar />
         <TableContainer>
@@ -241,6 +239,8 @@ export default function EnhancedTable() {
             <TableBody>
               {visibleRows.map((row, index) => {
                 const labelId = `enhanced-table-checkbox-${index}`;
+
+                const src = "/" + row.address.replace(" ", "");
 
                 return (
                   <TableRow
@@ -262,6 +262,7 @@ export default function EnhancedTable() {
                     <TableCell align="center">{row.sqft}</TableCell>
                     <TableCell align="center">{row.jaylinFriendly}</TableCell>
                     <TableCell align="center">{row.status}</TableCell>
+                    <TableCell align="center"><Link href={src}><InfoIcon /></Link></TableCell>
                   </TableRow>
                 );
               })}

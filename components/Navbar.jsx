@@ -13,7 +13,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LoginIcon from '@mui/icons-material/Login';
 import HouseIcon from '@mui/icons-material/House';
-import theme from '@/styles/theme';
 
 const drawerWidth = 240;
 
@@ -71,12 +70,18 @@ export default function Navbar() {
   const handleDrawerOpen = () => {
     const closeButton = document.getElementsByClassName("closeButton")[0];
     closeButton.style.visibility = "visible";
+
+    const table = document.getElementsByClassName("enhancedTable")[0];
+    table.style.width = "85vw";
     setOpen(true);
   };
 
   const handleDrawerClose = () => {
     const closeButton = document.getElementsByClassName("closeButton")[0];
     closeButton.style.visibility = "hidden";
+
+    const table = document.getElementsByClassName("enhancedTable")[0];
+    table.style.width = "95vw";
     setOpen(false);
   };
 

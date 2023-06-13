@@ -50,15 +50,6 @@ export default function Home() {
       <Container className="d-flex flex-column">
         <Photo width="100%" height="200rem" alt="header" src="/hero.jpg"/>
         <EnhancedTable />
-        {Array.from({ length: row }).map((_, rowIndex) => (
-          <Row key={rowIndex} className="w-100">
-            {data.slice(rowIndex * 4, (rowIndex + 1) * 4).map((item, index) => (
-              <Col key={index} sm={12} md={5} lg={4}>
-                <CustomCard title={item.title} description={item.description} image={item.image} alt={item.alt} />
-              </Col>
-            ))}
-          </Row>
-        ))}
       </Container>
     </Box>
   );

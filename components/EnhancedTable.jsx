@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -22,7 +22,7 @@ import theme from '@/styles/theme';
 import Link from 'next/link';
 
 // MOVE NOTES TO DETAILS PAGE
-function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status, url, notes, rating) {
+function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status, url, rating) {
   return {
     address,
     price,
@@ -32,7 +32,6 @@ function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status
     isJaylinFriendly,
     status,
     url,
-    notes,
     rating
   };
 }
@@ -42,19 +41,19 @@ function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status
 // rank order --> pin some at the top of the table
 // text box inside notes cell 
 const rows = [
-  createData('Cupcake', 56435, 305, 3.7, 67, true, "new", "/"),
-  createData('Donut', 75647, 452, 25.0, 51, true, "contacted", "/"),
-  createData('Eclair', 32544, 262, 16.0, 24, false, "application sent", "/"),
-  createData('Frozen yoghurt', 6434, 159, 6.0, 24, true, "new", "/"),
-  createData('Gingerbread', 34232, 356, 16.0, 49, true, "new", "/"),
-  createData('Honeycomb', 45264, 408, 3.2, 87, false, "new", "/"),
-  createData('Ice cream sandwich', 54624, 237, 9.0, 37, true, "new", "/"),
-  createData('Jelly Bean', 87654, 375, 0.0, 94, true, "new", "/"),
-  createData('KitKat', 567356, 518, 26.0, 65, true, "application sent", "/"),
-  createData('Lollipop', 756845, 392, 0.2, 98, false, "new", "/"),
-  createData('Marshmallow', 234573, 318, 0, 81, true, "contacted", "/"),
-  createData('Nougat', 98645, 360, 19.0, 9, true, "contacted", "/"),
-  createData('Oreo', 935673, 437, 18.0, 63, true, "viewing scheduled", "/"),
+  createData('Cupcake', 56435, 305, 3.7, 67, true, "new", "/", 0),
+  createData('Donut', 75647, 452, 25.0, 51, true, "contacted", "/", 0),
+  createData('Eclair', 32544, 262, 16.0, 24, false, "application sent", "/", 0),
+  createData('Frozen yoghurt', 6434, 159, 6.0, 24, true, "new", "/", 0),
+  createData('Gingerbread', 34232, 356, 16.0, 49, true, "new", "/", 0),
+  createData('Honeycomb', 45264, 408, 3.2, 87, false, "new", "/", 0),
+  createData('Ice cream sandwich', 54624, 237, 9.0, 37, true, "new", "/", 0),
+  createData('Jelly Bean', 87654, 375, 0.0, 94, true, "new", "/", 0),
+  createData('KitKat', 567356, 518, 26.0, 65, true, "application sent", "/", 0),
+  createData('Lollipop', 756845, 392, 0.2, 98, false, "new", "/", 0),
+  createData('Marshmallow', 234573, 318, 0, 81, true, "contacted", "/", 0),
+  createData('Nougat', 98645, 360, 19.0, 9, true, "contacted", "/", 0),
+  createData('Oreo', 935673, 437, 18.0, 63, true, "viewing scheduled", "/", 0),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -167,7 +166,6 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
-        <TableCell>Notes</TableCell>
         <TableCell></TableCell>
       </TableRow>
     </TableHead>
@@ -229,12 +227,15 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [ratingValues, setRatingValues] = useState({});
+
 
   const handleRequestSort = (_event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
+    setOrderBy(property === 'rating' ? 'rating' : property);
   };
+
 
   const handleChangePage = (_event, newPage) => {
     setPage(newPage);
@@ -254,14 +255,20 @@ export default function EnhancedTable() {
 
   const visibleRows = React.useMemo(
     () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage,
-      ),
-    [order, orderBy, page, rowsPerPage],
+      stableSort(
+        rows,
+        getComparator(order, orderBy === 'rating' ? 'address' : orderBy)
+      ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+    [order, orderBy, page, rowsPerPage, ratingValues]
   );
 
 
+  const handleRatingChange = (rowAddress, newValue) => {
+    setRatingValues((prevRatingValues) => ({
+      ...prevRatingValues,
+      [rowAddress]: newValue,
+    }));
+  };
 
   return (
     <Box className="enhancedTable" sx={{ width: '95vw' }}>
@@ -281,8 +288,8 @@ export default function EnhancedTable() {
             />
             <TableBody>
               {visibleRows.map((row) => {
-                const price = formatMoney(row.price)
-                const [rating, setRating] = React.useState(0);
+                const price = formatMoney(row.price);
+                const rating = ratingValues[row.address] || row.rating;
 
                 return (
                   <TableRow
@@ -307,18 +314,31 @@ export default function EnhancedTable() {
                     <TableCell align="center">
                       {/* RATING IS NOT SORTING */}
                       <Rating
-                        name="simple-controlled"
-                        value={row.rating}
+                        name={`rating-${row.address}`}
+                        value={rating}
                         onChange={(event, newValue) => {
-                          setRating(newValue);
+                          handleRatingChange(row.address, newValue);
+                        }}
+                      />
+                      {rating}
+                    </TableCell>
+                    <TableCell align="center">
+                      <Link
+                        href={{
+                          pathname: "/property",
+                          query: {
+                            address: row.address,
+                            rooms: row.rooms,
+                            baths: row.baths,
+                            sqft: row.sqft,
+                            isJaylinFriendly: row.isJaylinFriendly,
+                            status: row.status,
+                            url: row.url,
+                            price: price,
+                          },
                         }}
                       /> {rating}
                     </TableCell>
-                    <TableCell align="center">{row.notes}</TableCell >
-                    <TableCell align="center"><Link href={{
-                      pathname: '/property',
-                      query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status, url: row.url, price: price }
-                    }}><InfoIcon /></Link></TableCell>
                   </TableRow>
                 );
               })}

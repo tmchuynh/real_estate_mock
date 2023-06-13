@@ -229,7 +229,6 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rating, setRating] = React.useState(2);
 
   const handleRequestSort = (_event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -283,6 +282,8 @@ export default function EnhancedTable() {
             <TableBody>
               {visibleRows.map((row) => {
                 const price = formatMoney(row.price)
+                const [rating, setRating] = React.useState(0);
+
                 return (
                   <TableRow
                     hover
@@ -306,18 +307,18 @@ export default function EnhancedTable() {
                     <TableCell align="center">
                       {/* RATING IS NOT SORTING */}
                       <Rating
-                      name="simple-controlled"
-                      value={row.rating}
-                      onChange={(event, newValue) => {
-                        setRating(newValue);
-                      }}
-                    />
+                        name="simple-controlled"
+                        value={row.rating}
+                        onChange={(event, newValue) => {
+                          setRating(newValue);
+                        }}
+                      /> {rating}
                     </TableCell>
                     <TableCell align="center">{row.notes}</TableCell >
-                      <TableCell align="center"><Link href={{
-                        pathname: '/property',
-                        query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status, url: row.url, price: price }
-                      }}><InfoIcon /></Link></TableCell>
+                    <TableCell align="center"><Link href={{
+                      pathname: '/property',
+                      query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status, url: row.url, price: price }
+                    }}><InfoIcon /></Link></TableCell>
                   </TableRow>
                 );
               })}

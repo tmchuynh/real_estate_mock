@@ -7,6 +7,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from "@/components/Navbar";
 import { Container } from 'react-bootstrap';
 import Link from "next/link";
+import Fab from '@mui/material/Fab';
+import theme from '@/styles/theme';
+import ReplyIcon from '@mui/icons-material/Reply';
+
 import QuiltedImageList from "@/components/QuiltedImageList";
 
 export default function PropertyDetails() {
@@ -74,12 +78,22 @@ export default function PropertyDetails() {
                     <Grid p xs={2}>
                         <p>{router.query.status}</p>
                     </Grid>
+                    <Grid p xs={12}>
+                        {router.query.isJaylinFriendly === "true" ? (
+                            <Chip label="Jaylin allowed" />
+                        ) : (
+                            <Chip label="WHY IS THIS ONE SAVED 💢" variant="outlined" />
+                        )}
+                    </Grid>
+                    <Grid p xs={12}>
+                        <Fab variant="extended" type='button' href="/" style={{ backgroundColor: theme.palette.primary.light }}>
+                            <ReplyIcon sx={{ mr: 2 }} />
+                            Back
+                        </Fab>
+                    </Grid>
                 </Grid>
-                {router.query.isJaylinFriendly === "true" ? (
-                    <Chip label="Jaylin allowed" />
-                ) : (
-                    <Chip label="WHY IS THIS ONE SAVED 💢" variant="outlined" />
-                )}
+
+
             </Container>
             <QuiltedImageList data={itemData} />
         </Box>

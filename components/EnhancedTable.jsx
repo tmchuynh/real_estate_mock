@@ -229,13 +229,11 @@ export default function EnhancedTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [ratingValues, setRatingValues] = useState({});
 
-
   const handleRequestSort = (_event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property === 'rating' ? 'rating' : property);
   };
-
 
   const handleChangePage = (_event, newPage) => {
     setPage(newPage);
@@ -262,13 +260,18 @@ export default function EnhancedTable() {
     [order, orderBy, page, rowsPerPage, ratingValues]
   );
 
-
   const handleRatingChange = (rowAddress, newValue) => {
-    setRatingValues((prevRatingValues) => ({
-      ...prevRatingValues,
-      [rowAddress]: newValue,
-    }));
+    setRatingValues((prevRatingValues) => {
+      const updatedRatingValues = {
+        ...prevRatingValues,
+        [rowAddress]: newValue,
+      };
+      return updatedRatingValues;
+    });
   };
+
+
+
 
   return (
     <Box className="enhancedTable" sx={{ width: '95vw' }}>
@@ -337,7 +340,7 @@ export default function EnhancedTable() {
                             price: price,
                           },
                         }}
-                      /> {rating}
+                      > <InfoIcon /> </Link>
                     </TableCell>
                   </TableRow>
                 );

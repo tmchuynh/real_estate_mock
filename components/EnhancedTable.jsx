@@ -33,19 +33,19 @@ function createData(address, rooms, baths, sqft, jaylinFriendly, status) {
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67,"true", "true"),
-  createData('Donut', 452, 25.0, 51,"false", "true"),
-  createData('Eclair', 262, 16.0, 24,"true", "false"),
-  createData('Frozen yoghurt', 159, 6.0, 24,"true", "true"),
-  createData('Gingerbread', 356, 16.0, 49,"true", "true"),
-  createData('Honeycomb', 408, 3.2, 87,"true", "true"),
-  createData('Ice cream sandwich', 237, 9.0, 37,"true", "true"),
-  createData('Jelly Bean', 375, 0.0, 94,"false", "true"),
-  createData('KitKat', 518, 26.0, 65,"true", "true"),
-  createData('Lollipop', 392, 0.2, 98,"true", "false"),
-  createData('Marshmallow', 318, 0, 81,"true", "true"),
+  createData('Cupcake', 305, 3.7, 67, "true", "true"),
+  createData('Donut', 452, 25.0, 51, "false", "true"),
+  createData('Eclair', 262, 16.0, 24, "true", "false"),
+  createData('Frozen yoghurt', 159, 6.0, 24, "true", "true"),
+  createData('Gingerbread', 356, 16.0, 49, "true", "true"),
+  createData('Honeycomb', 408, 3.2, 87, "true", "true"),
+  createData('Ice cream sandwich', 237, 9.0, 37, "true", "true"),
+  createData('Jelly Bean', 375, 0.0, 94, "false", "true"),
+  createData('KitKat', 518, 26.0, 65, "true", "true"),
+  createData('Lollipop', 392, 0.2, 98, "true", "false"),
+  createData('Marshmallow', 318, 0, 81, "true", "true"),
   createData('Nougat', 360, 19.0, 9, "false", "true"),
-  createData('Oreo', 437, 18.0, 63,"true", "false"),
+  createData('Oreo', 437, 18.0, 63, "true", "false"),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -110,13 +110,13 @@ const headCells = [
   {
     id: 'status',
     numeric: false,
-    disablePadding: false,
+    disablePadding: true,
     label: 'Status ✔️',
   },
 ];
 
 function EnhancedTableHead(props) {
-  const {order, orderBy, numSelected, rowCount, onRequestSort } =
+  const { order, orderBy, rowCount, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -125,7 +125,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        
+
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -138,7 +138,7 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label} 
+              {headCell.label}
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
@@ -153,7 +153,6 @@ function EnhancedTableHead(props) {
 }
 
 EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
@@ -161,54 +160,30 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
 
   return (
     <Toolbar
       sx={{
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-        }),
+        bgcolor: (theme) =>
+          alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
       }}
-      style={{backgroundColor: theme.palette.primary.main, color: "white"}}
-    > 
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Saved Properties
-        </Typography>
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : <></>}
+      style={{ backgroundColor: theme.palette.primary.main, color: "white" }}
+    >
+      <Typography
+        sx={{ flex: '1 1 100%' }}
+        variant="h6"
+        id="tableTitle"
+        component="div"
+      >
+        Saved Properties
+      </Typography>
     </Toolbar>
   );
 }
 
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
+
 
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState('asc');
@@ -253,7 +228,7 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar  />
+        <EnhancedTableToolbar />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}

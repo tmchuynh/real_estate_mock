@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import StandaloneToggleButton from './ToggleHeart';
 
 const CustomCard = (props) => {
+  const title = props.title.replace(" ", "%");
+  const src = "./" +  title;
   return (
     <Card sx={{ width: 345 }} style={{margin: "1rem"}}>
       <StandaloneToggleButton />
@@ -26,7 +28,7 @@ const CustomCard = (props) => {
       </CardContent>
       <CardActions>
         <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small" href={src}>Learn More</Button>
       </CardActions>
     </Card>
   );

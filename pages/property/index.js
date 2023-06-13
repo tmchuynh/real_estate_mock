@@ -8,6 +8,7 @@ export default function PropertyDetails() {
             <h1>TESTING</h1>
             <>
             {router.query.address}
+            {router.query.price}
             {router.query.rooms}
             {router.query.baths}
             {router.query.sqft}

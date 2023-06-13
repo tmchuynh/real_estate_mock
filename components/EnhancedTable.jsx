@@ -20,9 +20,10 @@ import InfoIcon from '@mui/icons-material/Info';
 import theme from '@/styles/theme';
 import Link from 'next/link';
 
-function createData(address, rooms, baths, sqft, isJaylinFriendly, status) {
+function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status) {
   return {
     address,
+    price,
     rooms,
     baths,
     sqft,
@@ -32,19 +33,19 @@ function createData(address, rooms, baths, sqft, isJaylinFriendly, status) {
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, "true", "true"),
-  createData('Donut', 452, 25.0, 51, "false", "true"),
-  createData('Eclair', 262, 16.0, 24, "true", "false"),
-  createData('Frozen yoghurt', 159, 6.0, 24, "true", "true"),
-  createData('Gingerbread', 356, 16.0, 49, "true", "true"),
-  createData('Honeycomb', 408, 3.2, 87, "true", "true"),
-  createData('Ice cream sandwich', 237, 9.0, 37, "true", "true"),
-  createData('Jelly Bean', 375, 0.0, 94, "false", "true"),
-  createData('KitKat', 518, 26.0, 65, "true", "true"),
-  createData('Lollipop', 392, 0.2, 98, "true", "false"),
-  createData('Marshmallow', 318, 0, 81, "true", "true"),
-  createData('Nougat', 360, 19.0, 9, "false", "true"),
-  createData('Oreo', 437, 18.0, 63, "true", "false"),
+  createData('Cupcake', 56435, 305, 3.7, 67, "true", "true"),
+  createData('Donut', 75647, 452, 25.0, 51, "false", "true"),
+  createData('Eclair', 32544, 262, 16.0, 24, "true", "false"),
+  createData('Frozen yoghurt', 6434, 159, 6.0, 24, "true", "true"),
+  createData('Gingerbread', 34232, 356, 16.0, 49, "true", "true"),
+  createData('Honeycomb', 45264, 408, 3.2, 87, "true", "true"),
+  createData('Ice cream sandwich', 54624, 237, 9.0, 37, "true", "true"),
+  createData('Jelly Bean', 87654, 375, 0.0, 94, "false", "true"),
+  createData('KitKat', 567356, 518, 26.0, 65, "true", "true"),
+  createData('Lollipop', 756845, 392, 0.2, 98, "true", "false"),
+  createData('Marshmallow', 234573, 318, 0, 81, "true", "true"),
+  createData('Nougat', 98645, 360, 19.0, 9, "false", "true"),
+  createData('Oreo', 935673, 437, 18.0, 63, "true", "false"),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -81,6 +82,12 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'Address 🌍',
+  },
+  {
+    id: 'price',
+    numeric: false,
+    disablePadding: false,
+    label: 'Price 💲',
   },
   {
     id: 'rooms',
@@ -181,6 +188,26 @@ function EnhancedTableToolbar(_props) {
   );
 }
 
+
+function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
+  try {
+    decimalCount = Math.abs(decimalCount);
+    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+    const negativeSign = amount < 0 ? "-" : "";
+
+    let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+    let j = (i.length > 3) ? i.length % 3 : 0;
+
+    return negativeSign +
+      (j ? i.substr(0, j) + thousands : '') +
+      i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) +
+      (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+  } catch (e) {
+    console.log(e)
+  }
+};
+
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -220,6 +247,7 @@ export default function EnhancedTable() {
   );
 
 
+
   return (
     <Box className="enhancedTable" sx={{ width: '95vw' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -238,6 +266,7 @@ export default function EnhancedTable() {
             />
             <TableBody>
               {visibleRows.map((row) => {
+                const price = formatMoney(row.price)
                 return (
                   <TableRow
                     hover
@@ -251,6 +280,7 @@ export default function EnhancedTable() {
                     >
                       {row.address}
                     </TableCell>
+                    <TableCell align="center">${price}</TableCell>
                     <TableCell align="center">{row.rooms}</TableCell>
                     <TableCell align="center">{row.baths}</TableCell>
                     <TableCell align="center">{row.sqft}</TableCell>

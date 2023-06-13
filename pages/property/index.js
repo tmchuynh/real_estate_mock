@@ -12,6 +12,11 @@ import QuiltedImageList from "@/components/QuiltedImageList";
 export default function PropertyDetails() {
     const router = useRouter();
     const src = router.query.url;
+    // https://www.google.com/maps/place/2026+W+Sago+Palm+Rd,+Colton,+CA+92324/@34.0780618,-117.3678268,17z/data=!3m1!4b1!4m10!1m2!2m1!1s2026+W+Sago+Palm+Rd+Unit+N%2FA,+Colton,+CA+92324!3m6!1s0x80dcb2aab4d4eead:0x64cb18266707f127!8m2!3d34.0780619!4d-117.3629559!15sCi4yMDI2IFcgU2FnbyBQYWxtIFJkIFVuaXQgTi9BLCBDb2x0b24sIENBIDkyMzI0kgERY29tcG91bmRfYnVpbGRpbmfgAQA!16s%2Fg%2F11c24j5k9r?entry=ttu
+
+    // https://www.google.com/maps/dir/2759+N+Chauncey+Ln,+Orange,+CA+92867-2081,+USA/2026+W+Sago+Palm+Rd,+Colton,+CA+92324/@33.9594863,-117.9187241,10z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x80dcd0da9ed03d0b:0xb28650ba8fc5d471!2m2!1d-117.8190992!2d33.8352222!1m5!1m1!1s0x80dcb2aab4d4eead:0x64cb18266707f127!2m2!1d-117.3629559!2d34.0780619!3e0?entry=ttu
+
+    // distance between two points
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />

@@ -13,7 +13,6 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -34,19 +33,19 @@ function createData(address, rooms, baths, sqft, jaylinFriendly, status) {
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3, true),
-  createData('Donut', 452, 25.0, 51, 4.9, true),
-  createData('Eclair', 262, 16.0, 24, 6.0, true),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, true),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, true),
-  createData('Honeycomb', 408, 3.2, 87, 6.5, true),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, true),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0, true),
-  createData('KitKat', 518, 26.0, 65, 7.0, true),
-  createData('Lollipop', 392, 0.2, 98, 0.0, true),
-  createData('Marshmallow', 318, 0, 81, 2.0, true),
-  createData('Nougat', 360, 19.0, 9, 37.0, true),
-  createData('Oreo', 437, 18.0, 63, 4.0, true),
+  createData('Cupcake', 305, 3.7, 67,"true", "true"),
+  createData('Donut', 452, 25.0, 51,"false", "true"),
+  createData('Eclair', 262, 16.0, 24,"true", "false"),
+  createData('Frozen yoghurt', 159, 6.0, 24,"true", "true"),
+  createData('Gingerbread', 356, 16.0, 49,"true", "true"),
+  createData('Honeycomb', 408, 3.2, 87,"true", "true"),
+  createData('Ice cream sandwich', 237, 9.0, 37,"true", "true"),
+  createData('Jelly Bean', 375, 0.0, 94,"false", "true"),
+  createData('KitKat', 518, 26.0, 65,"true", "true"),
+  createData('Lollipop', 392, 0.2, 98,"true", "false"),
+  createData('Marshmallow', 318, 0, 81,"true", "true"),
+  createData('Nougat', 360, 19.0, 9, "false", "true"),
+  createData('Oreo', 437, 18.0, 63,"true", "false"),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -81,7 +80,7 @@ const headCells = [
   {
     id: 'address',
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: 'Address 🌍',
   },
   {
@@ -104,20 +103,20 @@ const headCells = [
   },
   {
     id: 'jaylinFriendly',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Jaylin 🐶',
   },
   {
     id: 'status',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Status ✔️',
   },
 ];
 
 function EnhancedTableHead(props) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
+  const {order, orderBy, numSelected, rowCount, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -126,21 +125,11 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          />
-        </TableCell>
+        
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
+            align={headCell.id == 'address' ? 'left' : 'center'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -149,7 +138,7 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              {headCell.label} 
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
@@ -166,7 +155,6 @@ function EnhancedTableHead(props) {
 EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
@@ -225,7 +213,6 @@ EnhancedTableToolbar.propTypes = {
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
-  const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -236,34 +223,6 @@ export default function EnhancedTable() {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelected = rows.map((n) => n.address);
-      setSelected(newSelected);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    setSelected(newSelected);
-  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -277,8 +236,6 @@ export default function EnhancedTable() {
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -296,7 +253,7 @@ export default function EnhancedTable() {
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar  />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
@@ -304,51 +261,35 @@ export default function EnhancedTable() {
             size={dense ? 'small' : 'medium'}
           >
             <EnhancedTableHead
-              numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.address);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.address)}
                     role="checkbox"
-                    aria-checked={isItemSelected}
                     tabIndex={-1}
                     key={row.address}
-                    selected={isItemSelected}
                     sx={{ cursor: 'pointer' }}
                   >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          'aria-labelledby': labelId,
-                        }}
-                      />
-                    </TableCell>
                     <TableCell
                       component="th"
                       id={labelId}
                       scope="row"
-                      padding="none"
                     >
                       {row.address}
                     </TableCell>
-                    <TableCell align="right">{row.rooms}</TableCell>
-                    <TableCell align="right">{row.baths}</TableCell>
-                    <TableCell align="right">{row.sqft}</TableCell>
-                    <TableCell align="right">{row.jaylinFriendly}</TableCell>
-                    <TableCell align="right">{row.status}</TableCell>
+                    <TableCell align="center">{row.rooms}</TableCell>
+                    <TableCell align="center">{row.baths}</TableCell>
+                    <TableCell align="center">{row.sqft}</TableCell>
+                    <TableCell align="center">{row.jaylinFriendly}</TableCell>
+                    <TableCell align="center">{row.status}</TableCell>
                   </TableRow>
                 );
               })}

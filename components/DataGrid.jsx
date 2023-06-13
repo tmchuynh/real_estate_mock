@@ -33,12 +33,12 @@ export default function ReorderDemo() {
 
         setVisibleColumns(orderedSelectedColumns);
     };
-    
+
     const header = <MultiSelect value={visibleColumns} options={columns} optionLabel="header" onChange={onColumnToggle} className="w-full sm:w-20rem" display="chip" />;
 
     return (
-        <div className="card">
-            <DataTable value={products} header={header} rows={5} rowsPerPageOptions={[5, 10, 25, 50]} paginator reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)} tableStyle={{ minWidth: '50rem' }}>
+        <div className="enhancedTable" sx={{ width: '80vw' }}>
+            <DataTable value={products} header={header} rows={5} rowsPerPageOptions={[5, 10, 25, 50]} paginator reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)} tableStyle={{ width: '80vw' }}>
                 <Column rowReorder style={{ width: '3rem' }} />
                 {visibleColumns.map((col) => (
                     <Column key={col.field} field={col.field} header={col.header} />

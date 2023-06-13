@@ -64,17 +64,18 @@ export default function Form() {
     }
 
     return (
-        <div id="form-container">
+        <div className="form-container" id='form-container' sx={{ width: '80vw' }}>
             <form onSubmit={handleSubmit}>
                 <Box sx={{ '& > :not(style)': { m: 1 } }}>
                     <Box
                         component="form"
                         sx={{
                             '& .MuiTextField-root': { m: 2 },
+                            margin: 'auto',
                         }}
                         autoComplete="off"
                     >
-                        <TextField required id="address" label="Address" variant="standard" style={{ width: "85vw" }} />
+                        <TextField required id="address" label="Address" variant="standard" style={{ width: "90%" }} />
                         <TextField
                             required
                             id="price"

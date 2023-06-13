@@ -274,7 +274,7 @@ export default function EnhancedTable() {
   };
 
   return (
-    <Box className="enhancedTable" sx={{ width: '95vw' }}>
+    <Box className="enhancedTable" sx={{ width: '80vw' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar />
         <TableContainer>

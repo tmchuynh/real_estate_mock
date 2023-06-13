@@ -80,7 +80,12 @@ export default function Navbar() {
 
     if (pathname === "/") {
       const table = document.getElementsByClassName("enhancedTable")[0];
-      table.style.width = "85vw";
+      table.style.width = "70vw";
+    }
+
+    if (pathname === "/property/new") {
+      const table = document.getElementsByClassName("form-container")[0];
+      table.style.width = "70vw";
     }
     setOpen(true);
   };
@@ -91,7 +96,12 @@ export default function Navbar() {
 
     if (pathname === "/") {
       const table = document.getElementsByClassName("enhancedTable")[0];
-      table.style.width = "95vw";
+      table.style.width = "80vw";
+    }
+
+    if (pathname === "/property/new") {
+      const table = document.getElementsByClassName("form-container")[0];
+      table.style.width = "80vw";
     }
     setOpen(false);
   };

@@ -69,20 +69,9 @@ export default function Navbar() {
   const [pathname, setPathname] = useState('');
 
   useEffect(() => {
-    // Get the current URL
-    const currentUrl = window.location.href;
-    console.log(currentUrl);
-
     // Accessing the pathname
     const pathname = window.location.pathname;
-    console.log(pathname);
     setPathname(pathname);
-
-    // Accessing the search parameters
-    const searchParams = new URLSearchParams(window.location.search);
-    console.log(searchParams.get('param1'));
-
-    // ...
   }, []);
 
   const handleDrawerOpen = () => {

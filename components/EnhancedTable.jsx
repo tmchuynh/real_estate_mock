@@ -50,7 +50,7 @@ const rows = [
   createData('Lollipop', 756845, 392, 0.2, 98, false, "new"),
   createData('Marshmallow', 234573, 318, 0, 81, true, "contacted"),
   createData('Nougat', 98645, 360, 19.0, 9, true, "contacted"),
-  createData('Oreo', 935673, 437, 18.0, 63, true, "scheduled"),
+  createData('Oreo', 935673, 437, 18.0, 63, true, "viewing scheduled"),
 ];
 
 function descendingComparator(a, b, orderBy) {

@@ -75,11 +75,18 @@ export default function Form() {
                         }}
                         autoComplete="off"
                     >
-                        <TextField required id="address" label="Address" variant="standard" style={{ width: "90%" }} />
+                        <TextField
+                            required
+                            id="address"
+                            label="Address"
+                            placeholder="2026 W Sago Palm Rd, Colton, CA 92324"
+                            variant="standard"
+                            style={{ width: "90%" }} />
                         <TextField
                             required
                             id="price"
                             label="Price"
+                            placeholder="1337"
                             type="number"
                             InputLabelProps={{
                                 shrink: true,
@@ -90,6 +97,7 @@ export default function Form() {
                             required
                             id="bedrooms"
                             label="Bedrooms"
+                            placeholder="3"
                             type="number"
                             InputLabelProps={{
                                 shrink: true,
@@ -100,6 +108,7 @@ export default function Form() {
                             required
                             id="bathrooms"
                             label="Bathrooms"
+                            placeholder="2"
                             type="number"
                             InputLabelProps={{
                                 shrink: true,
@@ -109,6 +118,7 @@ export default function Form() {
                         <TextField
                             id="sqft"
                             label="Sqft"
+                            placeholder="1337"
                             type="number"
                             InputLabelProps={{
                                 shrink: true,
@@ -118,6 +128,7 @@ export default function Form() {
                         <TextField
                             id="notes"
                             label="Notes"
+                            placeholder="Walking distance to two parks"
                             multiline
                             maxRows={4}
                             variant="standard"

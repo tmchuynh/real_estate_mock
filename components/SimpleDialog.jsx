@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 
-const status = ['new', 'contacted', 'application sent', 'viewing scheduled'];
+const status = ['new', 'contacted', 'application sent', 'tour scheduled'];
 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;

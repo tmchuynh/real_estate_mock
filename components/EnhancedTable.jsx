@@ -14,8 +14,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import Paper from '@mui/material/Paper';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import { visuallyHidden } from '@mui/utils';
 import InfoIcon from '@mui/icons-material/Info';
 import theme from '@/styles/theme';
@@ -56,7 +54,7 @@ const rows = [
   createData('Lollipop', 756845, 392, 0.2, 98, false, "new", "/", 0),
   createData('Marshmallow', 234573, 318, 0, 81, true, "contacted", "/", 0),
   createData('Nougat', 98645, 360, 19.0, 9, true, "contacted", "/", 0),
-  createData('Oreo', 935673, 437, 18.0, 63, true, "viewing scheduled", "/", 0),
+  createData('Oreo', 935673, 437, 18.0, 63, true, "tour scheduled", "/", 0),
 ];
 
 function descendingComparator(a, b, orderBy) {

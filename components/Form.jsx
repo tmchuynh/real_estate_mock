@@ -32,8 +32,8 @@ const statues = [
         label: 'application sent',
     },
     {
-        value: 'viewing scheduled',
-        label: 'viewing scheduled',
+        value: 'tour scheduled',
+        label: 'tour scheduled',
     },
 ];
 

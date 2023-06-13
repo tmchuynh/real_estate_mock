@@ -16,10 +16,10 @@ import Rating from '@mui/material/Rating';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
 import InfoIcon from '@mui/icons-material/Info';
+import CreateIcon from '@mui/icons-material/Create';
+import Fab from '@mui/material/Fab';
 import theme from '@/styles/theme';
 import Link from 'next/link';
-import Fab from '@mui/material/Fab';
-import NavigationIcon from '@mui/icons-material/Navigation';
 
 
 // MOVE NOTES TO DETAILS PAGE
@@ -366,8 +366,8 @@ export default function EnhancedTable() {
         />
       </Paper>
       <div className="d-flex">
-        <Fab variant="extended" type='button' href="/property/new" sx={{ margin: "1rem" }}>
-          <NavigationIcon sx={{ mr: 2 }} />
+        <Fab variant="extended" type='button' href="/property/new" sx={{ margin: "1rem" }} style={{backgroundColor: theme.palette.primary.light}}>
+          <CreateIcon sx={{ mr: 2 }} />
           New Property
         </Fab>
       </div>

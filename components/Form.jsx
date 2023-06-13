@@ -3,10 +3,9 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Fab from '@mui/material/Fab';
-import NavigationIcon from '@mui/icons-material/Navigation';
+import CreateIcon from '@mui/icons-material/Create';
 import { useRouter } from 'next/router';
 import theme from '@/styles/theme';
-import { Button } from 'react-bootstrap';
 
 
 const Jaylin = [
@@ -157,8 +156,8 @@ export default function PropertyForm() {
                         ))}
                     </TextField>
                     <br />
-                    <Fab variant="extended" type='submit' sx={{ margin: "1rem" }}>
-                        <NavigationIcon sx={{ mr: 2 }} />
+                    <Fab variant="extended" type='submit' sx={{ margin: "1rem" }} style={{backgroundColor: theme.palette.primary.light}}>
+                        <CreateIcon sx={{ mr: 2 }} />
                         Create
                     </Fab>
                 </Box>

@@ -21,6 +21,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import theme from '@/styles/theme';
 import Link from 'next/link';
 
+// MOVE NOTES TO DETAILS PAGE
 function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status, url, notes, rating) {
   return {
     address,
@@ -316,7 +317,7 @@ export default function EnhancedTable() {
 
                       <TableCell align="center"><Link href={{
                         pathname: '/property',
-                        query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status, url: row.url }
+                        query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status, url: row.url, price: price }
                       }}><InfoIcon /></Link></TableCell>
                   </TableRow>
                 );

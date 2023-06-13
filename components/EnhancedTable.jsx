@@ -20,6 +20,9 @@ import { visuallyHidden } from '@mui/utils';
 import InfoIcon from '@mui/icons-material/Info';
 import theme from '@/styles/theme';
 import Link from 'next/link';
+import Fab from '@mui/material/Fab';
+import NavigationIcon from '@mui/icons-material/Navigation';
+
 
 // MOVE NOTES TO DETAILS PAGE
 function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status, url, rating) {
@@ -365,10 +368,17 @@ export default function EnhancedTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+      <div className="d-flex">
+        <FormControlLabel
+          control={<Switch checked={dense} onChange={handleChangeDense} />}
+          label="Dense padding"
+        />
+        <Fab variant="extended" type='button' href="/property/new" sx={{ margin: "1rem" }}>
+          <NavigationIcon sx={{ mr: 2 }} />
+          New Property
+        </Fab>
+      </div>
+
     </Box>
   );
 }

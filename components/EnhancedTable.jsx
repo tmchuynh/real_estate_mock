@@ -36,7 +36,6 @@ function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status
 }
 
 // new is default
-// check box if app sent
 // rank order --> pin some at the top of the table
 // text box inside notes cell 
 const rows = [

@@ -8,10 +8,13 @@ import "primereact/resources/primereact.min.css";
 
 export default function ReorderDemo() {
     const columns = [
-        { field: 'code', header: 'Code' },
-        { field: 'name', header: 'Name' },
-        { field: 'category', header: 'Category' },
-        { field: 'quantity', header: 'Quantity' }
+        { field: 'address', header: 'Address' },
+        { field: 'price', header: 'Price' },
+        { field: 'baths', header: 'Baths' },
+        { field: 'beds', header: 'Beds' },
+        { field: 'sqft', header: 'Sqft' },
+        { field: 'status', header: 'Status' },
+        { field: 'isJaylinFriendy', header: 'Jaylin' },
     ];
 
     const [products, setProducts] = useState([]);

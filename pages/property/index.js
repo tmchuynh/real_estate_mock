@@ -10,12 +10,13 @@ import { Container } from 'react-bootstrap'
 
 export default function PropertyDetails() {
     const router = useRouter();
+
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
             <Navbar />
-            <Container className="d-flex flex-column">
-                <h1>{router.query.address}</h1>
+            <Container className="d-flex flex-column" style={{ width: '95vw' }}>
+                <h5>{router.query.address}</h5>
                 ${router.query.price}
                 {router.query.rooms}
                 {router.query.baths}

@@ -12,6 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Rating from '@mui/material/Rating';
 import Paper from '@mui/material/Paper';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
@@ -20,7 +21,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import theme from '@/styles/theme';
 import Link from 'next/link';
 
-function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status, url, notes) {
+function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status, url, notes, rating) {
   return {
     address,
     price,
@@ -30,7 +31,8 @@ function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status
     isJaylinFriendly,
     status,
     url,
-    notes
+    notes,
+    rating
   };
 }
 
@@ -125,6 +127,12 @@ const headCells = [
     disablePadding: true,
     label: 'Status ✔️',
   },
+  {
+    id: 'rating',
+    numeric: true,
+    disablePadding: true,
+    label: 'Rating ✔️',
+  },
 ];
 
 function EnhancedTableHead(props) {
@@ -195,7 +203,6 @@ function EnhancedTableToolbar(_props) {
   );
 }
 
-
 function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
   try {
     decimalCount = Math.abs(decimalCount);
@@ -221,6 +228,7 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [value, setValue] = React.useState(2);
 
   const handleRequestSort = (_event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -294,11 +302,22 @@ export default function EnhancedTable() {
                     <TableCell align="center">{row.isJaylinFriendly ? "✅"
                       : "❌"}</TableCell>
                     <TableCell align="center">{row.status}</TableCell>
+                    <TableCell align="center">
+                      {/* RATING IS NOT SORTING */}
+                      <Rating
+                      name="simple-controlled"
+                      value={row.rating}
+                      onChange={(event, newValue) => {
+                        setValue(newValue);
+                      }}
+                    />
+                    </TableCell>
                     <TableCell align="center">{row.notes}</TableCell >
-                    <TableCell align="center"><Link href={{
-                      pathname: '/property',
-                      query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status, url: row.url }
-                    }}><InfoIcon /></Link></TableCell>
+
+                      <TableCell align="center"><Link href={{
+                        pathname: '/property',
+                        query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status, url: row.url }
+                      }}><InfoIcon /></Link></TableCell>
                   </TableRow>
                 );
               })}

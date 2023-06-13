@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
 import { useRouter } from 'next/router';
+import { Form } from 'react-bootstrap';
 
 const Jaylin = [
     {
@@ -18,7 +18,7 @@ const Jaylin = [
     }
 ];
 
-const statues = [
+const status = [
     {
         value: 'new',
         label: 'new',
@@ -48,14 +48,11 @@ const initialProperty = {
     status: 'new'
 }
 
-export default function Form() {
+export default function PropertyForm() {
     const router = useRouter();
     const [property, setProperty] = useState(initialProperty);
 
-    useEffect(() => {
-        const formContainer = document.getElementById('form-container');
-        formContainer.style.display = 'block';
-    }, []);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -64,111 +61,107 @@ export default function Form() {
     }
 
     return (
-        <div className="form-container" id='form-container' sx={{ width: '80vw' }}>
-            <form onSubmit={handleSubmit}>
-                <Box sx={{ '& > :not(style)': { m: 1 } }}>
-                    <Box
-                        component="form"
-                        sx={{
-                            '& .MuiTextField-root': { m: 2 },
-                            margin: 'auto',
-                        }}
-                        autoComplete="off"
-                    >
-                        <TextField
-                            required
-                            id="address"
-                            label="Address"
-                            placeholder="2026 W Sago Palm Rd, Colton, CA 92324"
-                            variant="standard"
-                            style={{ width: "90%" }} />
-                        <TextField
-                            required
-                            id="price"
-                            label="Price"
-                            placeholder="1337"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            variant="standard"
-                        />
-                        <TextField
-                            required
-                            id="bedrooms"
-                            label="Bedrooms"
-                            placeholder="3"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            variant="standard"
-                        />
-                        <TextField
-                            required
-                            id="bathrooms"
-                            label="Bathrooms"
-                            placeholder="2"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            variant="standard"
-                        />
-                        <TextField
-                            id="sqft"
-                            label="Sqft"
-                            placeholder="1337"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            variant="standard"
-                        />
-                        <TextField
-                            id="notes"
-                            label="Notes"
-                            placeholder="Walking distance to two parks"
-                            multiline
-                            maxRows={4}
-                            variant="standard"
-                        />
-                        <TextField
-                            select
-                            id="jaylin"
-                            label="Jaylin"
-                            defaultValue="true"
-                            helperText="Is Jaylin allowed?"
-                            variant="standard"
-                        >
-                            {Jaylin.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <TextField
-                            select
-                            id="status"
-                            label="Status"
-                            defaultValue="new"
-                            helperText="What's the status on this one?"
-                            variant="standard"
-                        >
-                            {statues.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <br />
-                        <Fab variant="extended" type='submit' sx={{ margin: "1rem" }}>
-                            <NavigationIcon sx={{ mr: 2 }} />
-                            Create
-                        </Fab>
-                    </Box>
-                </Box>
-            </form>
-        </div>
+        <Box sx={{ '& > :not(style)': { m: 1 } }}>
+            <Box
+                component="form"
+                sx={{
+                    '& .MuiTextField-root': { m: 2 },
+                    margin: 'auto',
+                }}
+                autoComplete="off"
+            >
+                <TextField
+                    required
+                    id="address"
+                    label="Address"
+                    placeholder="2026 W Sago Palm Rd, Colton, CA 92324"
+                    variant="standard"
+                    style={{ width: "90%" }} />
+                <TextField
+                    required
+                    id="price"
+                    label="Price"
+                    placeholder="1337"
+                    type="number"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    variant="standard"
+                />
+                <TextField
+                    required
+                    id="bedrooms"
+                    label="Bedrooms"
+                    placeholder="3"
+                    type="number"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    variant="standard"
+                />
+                <TextField
+                    required
+                    id="bathrooms"
+                    label="Bathrooms"
+                    placeholder="2"
+                    type="number"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    variant="standard"
+                />
+                <TextField
+                    id="sqft"
+                    label="Sqft"
+                    placeholder="1337"
+                    type="number"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    variant="standard"
+                />
+                <TextField
+                    id="notes"
+                    label="Notes"
+                    placeholder="Walking distance to two parks"
+                    multiline
+                    maxRows={4}
+                    variant="standard"
+                />
+                <TextField
+                    select
+                    id="jaylin"
+                    label="Jaylin"
+                    defaultValue="true"
+                    helperText="Is Jaylin allowed?"
+                    variant="standard"
+                >
+                    {Jaylin.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                    select
+                    id="status"
+                    label="Status"
+                    defaultValue="new"
+                    helperText="What's the status on this one?"
+                    variant="standard"
+                >
+                    {status.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                    ))}
+                </TextField>
+                <br />
+                <Fab variant="extended" type='submit' sx={{ margin: "1rem" }}>
+                    <NavigationIcon sx={{ mr: 2 }} />
+                    Create
+                </Fab>
+            </Box>
+        </Box>
     );
 }

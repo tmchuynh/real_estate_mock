@@ -13,6 +13,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LoginIcon from '@mui/icons-material/Login';
 import HouseIcon from '@mui/icons-material/House';
+import theme from '@/styles/theme';
 
 const drawerWidth = 240;
 
@@ -80,74 +81,76 @@ export default function Navbar() {
   };
 
   return (
-      <Drawer variant="permanent" open={open}>
+    <Drawer variant="permanent" open={open}>
 
-        <DrawerHeader>
-          <IconButton className='closeButton' onClick={handleDrawerClose} style={{ visibility: "hidden" }}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
+      <DrawerHeader>
+        <IconButton className='closeButton' onClick={handleDrawerClose} style={{ visibility: "hidden" }}>
+          {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+        </IconButton>
 
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          edge="start"
+          sx={{
+            marginRight: 0,
+            ...(open && { display: 'none' }),
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+      </DrawerHeader>
+      <Divider />
+      <List>
+        <ListItem disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
             sx={{
-              marginRight: 0,
-              ...(open && { display: 'none' }),
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
             }}
+            href="/login"
           >
-            <MenuIcon />
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
+            <ListItemIcon
               sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
               }}
-              href="/login"
+              style={{ color: theme.palette.primary.dark }}
             >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                <LoginIcon />
-              </ListItemIcon>
-              <ListItemText primary="Login" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
+              <LoginIcon />
+            </ListItemIcon>
+            <ListItemText primary="Login" sx={{ opacity: open ? 1 : 0 }} />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+        <ListItem disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+            href="/login"
+          >
+            <ListItemIcon
               sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
               }}
-              href="/login"
+              style={{ color: theme.palette.secondary.dark }}
             >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                <HouseIcon />
-              </ListItemIcon>
-              <ListItemText primary="HELLO" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Drawer>
+              <HouseIcon />
+            </ListItemIcon>
+            <ListItemText primary="HELLO" sx={{ opacity: open ? 1 : 0 }} />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Drawer>
   );
 }

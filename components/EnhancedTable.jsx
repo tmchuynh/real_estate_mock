@@ -19,8 +19,8 @@ import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import theme from '@/styles/theme';
 
 function createData(name, calories, fat, carbs, protein) {
   return {
@@ -182,7 +182,8 @@ function EnhancedTableToolbar(props) {
             alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
         }),
       }}
-    >
+      style={{backgroundColor: theme.palette.primary.main, color: "white"}}
+    > 
       {numSelected > 0 ? (
         <Typography
           sx={{ flex: '1 1 100%' }}
@@ -209,13 +210,7 @@ function EnhancedTableToolbar(props) {
             <DeleteIcon />
           </IconButton>
         </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
+      ) : <></>}
     </Toolbar>
   );
 }

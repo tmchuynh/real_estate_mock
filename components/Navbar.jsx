@@ -82,8 +82,6 @@ export default function Navbar() {
       const table = document.getElementsByClassName("enhancedTable")[0];
       table.style.width = "70vw";
     }
-
-
     setOpen(true);
   };
 
@@ -95,8 +93,6 @@ export default function Navbar() {
       const table = document.getElementsByClassName("enhancedTable")[0];
       table.style.width = "80vw";
     }
-
-
     setOpen(false);
   };
 

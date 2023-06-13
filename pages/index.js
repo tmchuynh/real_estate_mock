@@ -4,40 +4,7 @@ import { Container } from 'react-bootstrap'
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Photo from "@/components/Photo";
-
-
-const data = [
-  {
-    image: "/image1.jpg",
-    alt: "Card 1 image",
-    title: "Card 1 title",
-    description: "Card 1 description",
-  }, {
-    image: "path/to/image1.jpg",
-    alt: "Card 1 image",
-    title: "Card 1 title",
-    description: "Card 1 description",
-  },
-  {
-    image: "path/to/image1.jpg",
-    alt: "Card 1 image",
-    title: "Card 1 title",
-    description: "Card 1 description",
-  },
-  {
-    image: "path/to/image1.jpg",
-    alt: "Card 1 image",
-    title: "Card 1 title",
-    description: "Card 1 description",
-  },
-  {
-    image: "path/to/image1.jpg",
-    alt: "Card 1 image",
-    title: "Card 1 title",
-    description: "Card 1 description",
-  },
-];
-
+import ReorderDemo from "@/components/DataGrid";
 
 export default function Home() {
   return (
@@ -47,6 +14,7 @@ export default function Home() {
       <Container className="d-flex flex-column">
         <Photo width="100%" height="200rem" alt="header" src="/hero.jpg"/>
         <EnhancedTable />
+        <ReorderDemo />
       </Container>
     </Box>
   );

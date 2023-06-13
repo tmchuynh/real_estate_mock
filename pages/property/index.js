@@ -20,6 +20,33 @@ export default function PropertyDetails() {
     // 50 min - 49.1 miles
 
     // distance between two points
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const earthRadiusKm = 6371; // Earth's radius in kilometers
+        const milesPerKm = 0.621371; // Conversion factor from kilometers to miles
+      
+        // Convert latitude and longitude from degrees to radians
+        const latRad1 = (Math.PI / 180) * lat1;
+        const lonRad1 = (Math.PI / 180) * lon1;
+        const latRad2 = (Math.PI / 180) * lat2;
+        const lonRad2 = (Math.PI / 180) * lon2;
+      
+        // Calculate the differences between the latitude and longitude of the two points
+        const dLat = latRad2 - latRad1;
+        const dLon = lonRad2 - lonRad1;
+      
+        // Apply the Haversine formula to calculate the distance
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(latRad1) * Math.cos(latRad2) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const distanceKm = earthRadiusKm * c;
+        const distanceMiles = distanceKm * milesPerKm;
+      
+        return distanceMiles;
+      }
+      // 32.59 instead of 42.8
+    const distance = calculateDistance(34.0780618, -117.3678268, 33.9594863, -117.9187241)
+
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -42,6 +69,9 @@ export default function PropertyDetails() {
                         <p>{router.query.sqft} sqft</p>
                     </Grid>
                     <Grid p xs={2}>
+                        <p>{calculateDistance(34.0780618, -117.3678268, 33.9594863, -117.9187241)}</p>
+                    </Grid>
+                    <Grid p xs={2}>
                         <p>{router.query.status}</p>
                     </Grid>
                 </Grid>
@@ -58,61 +88,61 @@ export default function PropertyDetails() {
 
 const itemData = [
     {
-      img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-      title: 'Breakfast',
-      rows: 2,
-      cols: 2,
+        img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
+        title: 'Breakfast',
+        rows: 2,
+        cols: 2,
     },
     {
-      img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-      title: 'Burger',
+        img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+        title: 'Burger',
     },
     {
-      img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-      title: 'Camera',
+        img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
+        title: 'Camera',
     },
     {
-      img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-      title: 'Coffee',
-      cols: 2,
+        img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+        title: 'Coffee',
+        cols: 2,
     },
     {
-      img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-      title: 'Hats',
-      cols: 2,
+        img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
+        title: 'Hats',
+        cols: 2,
     },
     {
-      img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
-      title: 'Honey',
-      author: '@arwinneil',
-      rows: 2,
-      cols: 2,
+        img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
+        title: 'Honey',
+        author: '@arwinneil',
+        rows: 2,
+        cols: 2,
     },
     {
-      img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-      title: 'Basketball',
+        img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
+        title: 'Basketball',
     },
     {
-      img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-      title: 'Fern',
+        img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
+        title: 'Fern',
     },
     {
-      img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-      title: 'Mushrooms',
-      rows: 2,
-      cols: 2,
+        img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
+        title: 'Mushrooms',
+        rows: 2,
+        cols: 2,
     },
     {
-      img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-      title: 'Tomato basil',
+        img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
+        title: 'Tomato basil',
     },
     {
-      img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-      title: 'Sea star',
+        img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
+        title: 'Sea star',
     },
     {
-      img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-      title: 'Bike',
-      cols: 2,
+        img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
+        title: 'Bike',
+        cols: 2,
     },
-  ];
+];

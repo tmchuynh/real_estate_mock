@@ -22,30 +22,31 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { visuallyHidden } from '@mui/utils';
 import theme from '@/styles/theme';
 
-function createData(name, calories, fat, carbs, protein) {
+function createData(address, rooms, baths, sqft, jaylinFriendly, status) {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    address,
+    rooms,
+    baths,
+    sqft,
+    jaylinFriendly,
+    status,
   };
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
+  createData('Cupcake', 305, 3.7, 67, 4.3, true),
+  createData('Donut', 452, 25.0, 51, 4.9, true),
+  createData('Eclair', 262, 16.0, 24, 6.0, true),
+  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, true),
+  createData('Gingerbread', 356, 16.0, 49, 3.9, true),
+  createData('Honeycomb', 408, 3.2, 87, 6.5, true),
+  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, true),
+  createData('Jelly Bean', 375, 0.0, 94, 0.0, true),
+  createData('KitKat', 518, 26.0, 65, 7.0, true),
+  createData('Lollipop', 392, 0.2, 98, 0.0, true),
+  createData('Marshmallow', 318, 0, 81, 2.0, true),
+  createData('Nougat', 360, 19.0, 9, 37.0, true),
+  createData('Oreo', 437, 18.0, 63, 4.0, true),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -82,34 +83,40 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: 'address',
     numeric: false,
     disablePadding: true,
     label: 'Dessert (100g serving)',
   },
   {
-    id: 'calories',
+    id: 'rooms',
     numeric: true,
     disablePadding: false,
     label: 'Calories',
   },
   {
-    id: 'fat',
+    id: 'baths',
     numeric: true,
     disablePadding: false,
     label: 'Fat (g)',
   },
   {
-    id: 'carbs',
+    id: 'sqft',
     numeric: true,
     disablePadding: false,
     label: 'Carbs (g)',
   },
   {
-    id: 'protein',
+    id: 'jaylinFriendly',
     numeric: true,
     disablePadding: false,
     label: 'Protein (g)',
+  },
+  {
+    id: 'status',
+    numeric: true,
+    disablePadding: false,
+    label: 'Status (g)',
   },
 ];
 
@@ -235,7 +242,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((n) => n.address);
       setSelected(newSelected);
       return;
     }
@@ -310,17 +317,17 @@ export default function EnhancedTable() {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.name);
+                const isItemSelected = isSelected(row.address);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.name)}
+                    onClick={(event) => handleClick(event, row.address)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.name}
+                    key={row.address}
                     selected={isItemSelected}
                     sx={{ cursor: 'pointer' }}
                   >
@@ -339,12 +346,13 @@ export default function EnhancedTable() {
                       scope="row"
                       padding="none"
                     >
-                      {row.name}
+                      {row.address}
                     </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
-                    <TableCell align="right">{row.carbs}</TableCell>
-                    <TableCell align="right">{row.protein}</TableCell>
+                    <TableCell align="right">{row.rooms}</TableCell>
+                    <TableCell align="right">{row.baths}</TableCell>
+                    <TableCell align="right">{row.sqft}</TableCell>
+                    <TableCell align="right">{row.jaylinFriendly}</TableCell>
+                    <TableCell align="right">{row.status}</TableCell>
                   </TableRow>
                 );
               })}

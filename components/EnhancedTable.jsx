@@ -20,7 +20,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import theme from '@/styles/theme';
 import Link from 'next/link';
 
-function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status) {
+function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status, url) {
   return {
     address,
     price,
@@ -29,23 +29,28 @@ function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status
     sqft,
     isJaylinFriendly,
     status,
+    url
   };
 }
 
+// new is default
+// check box if app sent
+// rank order --> pin some at the top of the table
+// text box inside notes cell 
 const rows = [
-  createData('Cupcake', 56435, 305, 3.7, 67, "true", "true"),
-  createData('Donut', 75647, 452, 25.0, 51, "false", "true"),
-  createData('Eclair', 32544, 262, 16.0, 24, "true", "false"),
-  createData('Frozen yoghurt', 6434, 159, 6.0, 24, "true", "true"),
-  createData('Gingerbread', 34232, 356, 16.0, 49, "true", "true"),
-  createData('Honeycomb', 45264, 408, 3.2, 87, "true", "true"),
-  createData('Ice cream sandwich', 54624, 237, 9.0, 37, "true", "true"),
-  createData('Jelly Bean', 87654, 375, 0.0, 94, "false", "true"),
-  createData('KitKat', 567356, 518, 26.0, 65, "true", "true"),
-  createData('Lollipop', 756845, 392, 0.2, 98, "true", "false"),
-  createData('Marshmallow', 234573, 318, 0, 81, "true", "true"),
-  createData('Nougat', 98645, 360, 19.0, 9, "false", "true"),
-  createData('Oreo', 935673, 437, 18.0, 63, "true", "false"),
+  createData('Cupcake', 56435, 305, 3.7, 67, true, "new"),
+  createData('Donut', 75647, 452, 25.0, 51, true, "contacted"),
+  createData('Eclair', 32544, 262, 16.0, 24, false, "application sent"),
+  createData('Frozen yoghurt', 6434, 159, 6.0, 24, true, "new"),
+  createData('Gingerbread', 34232, 356, 16.0, 49, true, "new"),
+  createData('Honeycomb', 45264, 408, 3.2, 87, false, "new"),
+  createData('Ice cream sandwich', 54624, 237, 9.0, 37, true, "new"),
+  createData('Jelly Bean', 87654, 375, 0.0, 94, true, "new"),
+  createData('KitKat', 567356, 518, 26.0, 65, true, "application sent"),
+  createData('Lollipop', 756845, 392, 0.2, 98, false, "new"),
+  createData('Marshmallow', 234573, 318, 0, 81, true, "contacted"),
+  createData('Nougat', 98645, 360, 19.0, 9, true, "contacted"),
+  createData('Oreo', 935673, 437, 18.0, 63, true, "scheduled"),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -284,11 +289,12 @@ export default function EnhancedTable() {
                     <TableCell align="center">{row.rooms}</TableCell>
                     <TableCell align="center">{row.baths}</TableCell>
                     <TableCell align="center">{row.sqft}</TableCell>
-                    <TableCell align="center">{row.isJaylinFriendly}</TableCell>
+                    <TableCell align="center">{row.isJaylinFriendly ? "✅"
+                      : "❌"}</TableCell>
                     <TableCell align="center">{row.status}</TableCell>
                     <TableCell align="center"><Link href={{
                       pathname: '/property',
-                      query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status}
+                      query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status, url: row.url }
                     }}><InfoIcon /></Link></TableCell>
                   </TableRow>
                 );

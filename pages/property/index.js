@@ -14,6 +14,7 @@ export default function PropertyDetails() {
             {router.query.sqft}
             {router.query.isJaylinFriendly}
             {router.query.status}
+            {router.query.url}
             </>
         </>
     )

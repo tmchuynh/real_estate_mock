@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { ProductService } from './ProductService'; import { MultiSelect } from 'primereact/multiselect';
+import { ProductService } from './ProductService';
+import { MultiSelect } from 'primereact/multiselect';
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import CreateIcon from '@mui/icons-material/Create';
@@ -38,10 +38,10 @@ export default function ReorderDemo() {
 
     return (
         <div className="enhancedTable" sx={{ width: '80vw' }}>
-            <DataTable value={products} header={header} rows={5} rowsPerPageOptions={[5, 10, 25, 50]} paginator reorderableColumns reorderableRows onRowReorder={(e) => setProducts(e.value)} tableStyle={{ width: '80vw' }}>
-                <Column rowReorder style={{ width: '3rem' }} />
+            <DataTable value={products} header={header} rows={5} rowsPerPageOptions={[5, 10, 25, 50]} paginator reorderableColumns reorderableRows  onRowReorder={(e) => setProducts(e.value)} tableStyle={{ width: '80vw' }}>
+                <Column rowReorder  style={{ width: '3rem' }} />
                 {visibleColumns.map((col) => (
-                    <Column key={col.field} field={col.field} header={col.header} />
+                    <Column key={col.field} sortable field={col.field} header={col.header} />
                 ))}
             </DataTable>
             <div className="d-flex">

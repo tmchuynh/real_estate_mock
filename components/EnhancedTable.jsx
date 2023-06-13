@@ -20,13 +20,13 @@ import InfoIcon from '@mui/icons-material/Info';
 import theme from '@/styles/theme';
 import Link from 'next/link';
 
-function createData(address, rooms, baths, sqft, jaylinFriendly, status) {
+function createData(address, rooms, baths, sqft, isJaylinFriendly, status) {
   return {
     address,
     rooms,
     baths,
     sqft,
-    jaylinFriendly,
+    isJaylinFriendly,
     status,
   };
 }
@@ -101,7 +101,7 @@ const headCells = [
     label: 'Sqft 📐',
   },
   {
-    id: 'jaylinFriendly',
+    id: 'isJaylinFriendly',
     numeric: false,
     disablePadding: false,
     label: 'Jaylin 🐶',
@@ -237,22 +237,16 @@ export default function EnhancedTable() {
               rowCount={rows.length}
             />
             <TableBody>
-              {visibleRows.map((row, index) => {
-                const labelId = `enhanced-table-checkbox-${index}`;
-
-                const src = "/" + row.address.replace(" ", "");
-
+              {visibleRows.map((row) => {
                 return (
                   <TableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
                     key={row.address}
-                    sx={{ cursor: 'pointer' }}
                   >
                     <TableCell
                       component="th"
-                      id={labelId}
                       scope="row"
                     >
                       {row.address}
@@ -260,9 +254,12 @@ export default function EnhancedTable() {
                     <TableCell align="center">{row.rooms}</TableCell>
                     <TableCell align="center">{row.baths}</TableCell>
                     <TableCell align="center">{row.sqft}</TableCell>
-                    <TableCell align="center">{row.jaylinFriendly}</TableCell>
+                    <TableCell align="center">{row.isJaylinFriendly}</TableCell>
                     <TableCell align="center">{row.status}</TableCell>
-                    <TableCell align="center"><Link href={src}><InfoIcon /></Link></TableCell>
+                    <TableCell align="center"><Link href={{
+                      pathname: '/property',
+                      query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status}
+                    }}><InfoIcon /></Link></TableCell>
                   </TableRow>
                 );
               })}

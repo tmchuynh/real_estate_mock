@@ -65,10 +65,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -86,37 +82,37 @@ const headCells = [
     id: 'address',
     numeric: false,
     disablePadding: true,
-    label: 'Dessert (100g serving)',
+    label: 'Address 🌍',
   },
   {
     id: 'rooms',
     numeric: true,
     disablePadding: false,
-    label: 'Calories',
+    label: 'Bedrooms 🛏️',
   },
   {
     id: 'baths',
     numeric: true,
     disablePadding: false,
-    label: 'Fat (g)',
+    label: 'Bathrooms 🚿',
   },
   {
     id: 'sqft',
     numeric: true,
     disablePadding: false,
-    label: 'Carbs (g)',
+    label: 'Sqft 📐',
   },
   {
     id: 'jaylinFriendly',
     numeric: true,
     disablePadding: false,
-    label: 'Protein (g)',
+    label: 'Jaylin 🐶',
   },
   {
     id: 'status',
     numeric: true,
     disablePadding: false,
-    label: 'Status (g)',
+    label: 'Status ✔️',
   },
 ];
 
@@ -207,7 +203,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          Saved Properties
         </Typography>
       )}
 

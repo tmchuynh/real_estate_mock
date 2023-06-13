@@ -22,6 +22,7 @@
     "dotenv": "^16.1.4",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
+    "mysql": "^2.18.1",
     "next": "13.4.5",
     "primereact": "^9.5.0",
     "react": "18.2.0",

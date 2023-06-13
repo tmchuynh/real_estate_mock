@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -65,8 +65,25 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function Navbar() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const pathname = window.location.pathname;
+  const [open, setOpen] = useState(false);
+  const [pathname, setPathname] = useState('');
+
+  useEffect(() => {
+    // Get the current URL
+    const currentUrl = window.location.href;
+    console.log(currentUrl);
+
+    // Accessing the pathname
+    const pathname = window.location.pathname;
+    console.log(pathname);
+    setPathname(pathname);
+
+    // Accessing the search parameters
+    const searchParams = new URLSearchParams(window.location.search);
+    console.log(searchParams.get('param1'));
+
+    // ...
+  }, []);
 
   const handleDrawerOpen = () => {
     const closeButton = document.getElementsByClassName("closeButton")[0];

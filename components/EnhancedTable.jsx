@@ -270,9 +270,6 @@ export default function EnhancedTable() {
     });
   };
 
-
-
-
   return (
     <Box className="enhancedTable" sx={{ width: '95vw' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -315,12 +312,13 @@ export default function EnhancedTable() {
                       : "❌"}</TableCell>
                     <TableCell align="center">{row.status}</TableCell>
                     <TableCell align="center">
-                      {/* RATING IS NOT SORTING */}
+                      {/* RATING IS NOT GETTING SAVED PER ROW */}
                       <Rating
                         name={`rating-${row.address}`}
                         value={rating}
                         onChange={(event, newValue) => {
-                          handleRatingChange(row.address, newValue);
+                          row.rating = handleRatingChange(row.address, newValue);
+                          console.log(row.rating);
                         }}
                       />
                       {rating}

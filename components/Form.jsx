@@ -61,7 +61,7 @@ export default function PropertyForm() {
     }
 
     return (
-        <Box sx={{ '& > :not(style)': { m: 1 } }}>
+        <Box claasName="form-container" sx={{ '& > :not(style)': { m: 1 } }}>
             <Box
                 component="form"
                 sx={{

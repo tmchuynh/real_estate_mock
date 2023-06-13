@@ -11,7 +11,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import LoginIcon from '@mui/icons-material/Login';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import HouseIcon from '@mui/icons-material/House';
 
 const drawerWidth = 240;
@@ -127,7 +127,7 @@ export default function Navbar() {
               justifyContent: open ? 'initial' : 'center',
               px: 2.5,
             }}
-            href="/login"
+            href="/"
           >
             <ListItemIcon
               sx={{
@@ -137,9 +137,31 @@ export default function Navbar() {
               }}
               style={{ color: theme.palette.primary.dark }}
             >
-              <LoginIcon />
+              <HouseIcon />
             </ListItemIcon>
-            <ListItemText primary="Login" sx={{ opacity: open ? 1 : 0 }} />
+            <ListItemText primary="Saved Properties" sx={{ opacity: open ? 1 : 0 }} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding sx={{ display: 'block' }}>
+          <ListItemButton
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+            href="/property/new"
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+              style={{ color: theme.palette.primary.dark }}
+            >
+              <AddCircleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Create Entry" sx={{ opacity: open ? 1 : 0 }} />
           </ListItemButton>
         </ListItem>
       </List>

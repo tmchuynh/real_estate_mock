@@ -40,12 +40,15 @@ export default function ReorderDemo() {
         <div className="enhancedTable" sx={{ width: '80vw' }}>
             <DataTable value={products} header={header} rows={5} rowsPerPageOptions={[5, 10, 25, 50]} paginator reorderableColumns reorderableRows  onRowReorder={(e) => setProducts(e.value)} tableStyle={{ width: '80vw' }}>
                 <Column rowReorder  style={{ width: '3rem' }} />
+<<<<<<< HEAD
                 <div className="d-flex">
                 <Fab variant="extended" type='button' href="/property/new" sx={{ margin: "1rem" }} style={{ backgroundColor: theme.palette.primary.light }}>
                     <CreateIcon sx={{ mr: 2 }} />
                     New Property
                 </Fab>
             </div>
+=======
+>>>>>>> main
                 {visibleColumns.map((col) => (
                     <Column key={col.field} sortable field={col.field} header={col.header} />
                 ))}

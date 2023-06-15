@@ -15,7 +15,7 @@ import QuiltedImageList from "@/components/QuiltedImageList";
 
 export default function PropertyDetails() {
     const router = useRouter();
-    const src = router.query.url;
+    const src = "https://www.redfin.com" + router.query.url;
 
     return (
         <Box sx={{ display: "flex" }}>

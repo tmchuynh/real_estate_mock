@@ -13,8 +13,6 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import { visuallyHidden } from '@mui/utils';
 import InfoIcon from '@mui/icons-material/Info';
 import theme from '@/styles/theme';
@@ -37,19 +35,19 @@ function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status
 // check box if app sent
 // rank order --> pin some at the top of the table
 const rows = [
-    createData('Cupcake', 56435, 305, 3.7, 67, true, "new"),
-    createData('Donut', 75647, 452, 25.0, 51, true, "contacted"),
-    createData('Eclair', 32544, 262, 16.0, 24, false, "application sent"),
-    createData('Frozen yoghurt', 6434, 159, 6.0, 24, true, "new"),
-    createData('Gingerbread', 34232, 356, 16.0, 49, true, "new"),
-    createData('Honeycomb', 45264, 408, 3.2, 87, false, "new"),
-    createData('Ice cream sandwich', 54624, 237, 9.0, 37, true, "new"),
-    createData('Jelly Bean', 87654, 375, 0.0, 94, true, "new"),
-    createData('KitKat', 567356, 518, 26.0, 65, true, "application sent"),
-    createData('Lollipop', 756845, 392, 0.2, 98, false, "new"),
-    createData('Marshmallow', 234573, 318, 0, 81, true, "contacted"),
-    createData('Nougat', 98645, 360, 19.0, 9, true, "contacted"),
-    createData('Oreo', 935673, 437, 18.0, 63, true, "viewing scheduled"),
+    createData('Cupcake', 56435, 305, 3.7, 67, true, "new", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('Donut', 75647, 452, 25.0, 51, true, "contacted", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('Eclair', 32544, 262, 16.0, 24, false, "application sent", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('Frozen yoghurt', 6434, 159, 6.0, 24, true, "new", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('Gingerbread', 34232, 356, 16.0, 49, true, "new", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('Honeycomb', 45264, 408, 3.2, 87, false, "new", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('Ice cream sandwich', 54624, 237, 9.0, 37, true, "new", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('Jelly Bean', 87654, 375, 0.0, 94, true, "new", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('KitKat', 567356, 518, 26.0, 65, true, "application sent", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('Lollipop', 756845, 392, 0.2, 98, false, "new", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('Marshmallow', 234573, 318, 0, 81, true, "contacted", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('Nougat', 98645, 360, 19.0, 9, true, "contacted", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
+    createData('Oreo', 935673, 437, 18.0, 63, true, "viewing scheduled", "/WA/Seattle/456-Pine-St-98101/home/5432167"),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -246,7 +244,6 @@ export default function EnhancedTable() {
     );
 
 
-
     return (
         <Box className="enhancedTable" sx={{ width: '95vw' }}>
             <Paper sx={{ width: '100%', mb: 2 }}>
@@ -288,7 +285,7 @@ export default function EnhancedTable() {
                                         <TableCell align="center">{row.status}</TableCell>
                                         <TableCell align="center"><Link href={{
                                             pathname: '/property',
-                                            query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status, url: row.url }
+                                            query: { address: row.address, rooms: row.rooms, baths: row.baths, sqft: row.sqft, isJaylinFriendly: row.isJaylinFriendly, status: row.status, url: row.url, price: price }
                                         }}><InfoIcon /></Link></TableCell>
                                     </TableRow>
                                 );

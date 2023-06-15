@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap'
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Photo from "@/components/Photo";
-import ReorderDemo from "@/components/DataGrid";
+import EnhancedTable from "@/components/EnhancedTable";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <Navbar />
       <Container className="d-flex flex-column">
         <Photo width="100%" height="200rem" alt="header" src="/hero.jpg"/>
-        <ReorderDemo />
+        <EnhancedTable/>
       </Container>
     </Box>
   );

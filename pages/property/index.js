@@ -15,7 +15,6 @@ import QuiltedImageList from "@/components/QuiltedImageList";
 
 export default function PropertyDetails() {
     const router = useRouter();
-    const src = "https://www.redfin.com" + router.query.url;
 
     return (
         <Box sx={{ display: "flex" }}>
@@ -24,7 +23,7 @@ export default function PropertyDetails() {
             <Container className="d-flex" style={{ width: '59vw' }}>
                 <Grid container spacing={1}>
                     <Grid p xs={12}>
-                        <Link href={src} ><b>{router.query.address}</b></Link>
+                         <b>{router.query.address}</b>
                     </Grid>
                     <Grid p xs={2}>
                         <p>${router.query.price}</p>
@@ -39,7 +38,7 @@ export default function PropertyDetails() {
                         <p>{router.query.sqft} sqft</p>
                     </Grid>
                     <Grid p xs={2}>
-                        <p>{router.query.status}</p>
+                        <p>Stuatus: {router.query.status}</p>
                     </Grid>
                     <Grid p xs={12}>
                         {router.query.isJaylinFriendly === "true" ? (

@@ -6,7 +6,6 @@ import Chip from '@mui/material/Chip';
 import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from "@/components/Navbar";
 import { Container } from 'react-bootstrap';
-import Link from "next/link";
 import Fab from '@mui/material/Fab';
 import theme from '@/styles/theme';
 import ReplyIcon from '@mui/icons-material/Reply';

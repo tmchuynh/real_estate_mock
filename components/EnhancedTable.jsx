@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -17,37 +17,6 @@ import { visuallyHidden } from '@mui/utils';
 import InfoIcon from '@mui/icons-material/Info';
 import theme from '@/styles/theme';
 import Link from 'next/link';
-
-function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status, url) {
-    return {
-        address,
-        price,
-        rooms,
-        baths,
-        sqft,
-        isJaylinFriendly,
-        status
-    };
-}
-
-// new is default
-// check box if app sent
-// rank order --> pin some at the top of the table
-const rows = [
-    createData('Cupcake', 56435, 305, 3.7, 67, true, "new"),
-    createData('Donut', 75647, 452, 25.0, 51, true, "contacted"),
-    createData('Eclair', 32544, 262, 16.0, 24, false, "application sent"),
-    createData('Frozen yoghurt', 6434, 159, 6.0, 24, true, "new"),
-    createData('Gingerbread', 34232, 356, 16.0, 49, true, "new"),
-    createData('Honeycomb', 45264, 408, 3.2, 87, false, "new"),
-    createData('Ice cream sandwich', 54624, 237, 9.0, 37, true, "new"),
-    createData('Jelly Bean', 87654, 375, 0.0, 94, true, "new"),
-    createData('KitKat', 567356, 518, 26.0, 65, true, "application sent"),
-    createData('Lollipop', 756845, 392, 0.2, 98, false, "new"),
-    createData('Marshmallow', 234573, 318, 0, 81, true, "contacted"),
-    createData('Nougat', 98645, 360, 19.0, 9, true, "contacted"),
-    createData('Oreo', 935673, 437, 18.0, 63, true, "viewing scheduled"),
-];
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -189,7 +158,6 @@ function EnhancedTableToolbar(_props) {
     );
 }
 
-
 function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
     try {
         decimalCount = Math.abs(decimalCount);
@@ -214,6 +182,8 @@ export default function EnhancedTable() {
     const [orderBy, setOrderBy] = React.useState('calories');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    const [rows, setRows] = useState([]);
 
     const handleRequestSort = (_event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -241,7 +211,6 @@ export default function EnhancedTable() {
             ),
         [order, orderBy, page, rowsPerPage],
     );
-
 
     return (
         <Box className="enhancedTable" sx={{ width: '95vw' }}>

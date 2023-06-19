@@ -7,7 +7,6 @@ import CreateIcon from '@mui/icons-material/Create';
 import { useRouter } from 'next/router';
 import theme from '@/styles/theme';
 
-
 const Jaylin = [
     {
         value: 'true',
@@ -53,14 +52,32 @@ export default function PropertyForm() {
     const router = useRouter();
     const [property, setProperty] = useState(initialProperty);
 
-    const handleSubmit = (e) => {
+    const [rows, setRows] = useState([]);
+
+    function handleSubmit(e) {
         e.preventDefault();
         setProperty(initialProperty);
-        router.push('/property');
+        console.log(e.target[0].value, e.target[1].value, e.target[2].value, e.target[3].value, e.target[4].value, e.target[5].value, e.target[7].value, e.target[8].value);
+        console.log(e.target[0].value);
+        const x = createData(e.target[0].value, e.target[1].value, e.target[2].value, e.target[3].value, e.target[4].value, e.target[5].value, e.target[7].value, e.target[8].value);
+        setRows(rows.push(x))
+        router.push('/');
+    }
+
+    function createData(address, price, rooms, baths, sqft, isJaylinFriendly, status) {
+        return {
+            address,
+            price,
+            rooms,
+            baths,
+            sqft,
+            isJaylinFriendly,
+            status
+        };
     }
 
     return (
-        <form onsubmit="handleSubmit()">
+        <form onSubmit={handleSubmit}>
             <Box claasName="form-container" sx={{ '& > :not(style)': { m: 1 } }}>
                 <Box
                     sx={{
@@ -156,7 +173,7 @@ export default function PropertyForm() {
                         ))}
                     </TextField>
                     <br />
-                    <Fab variant="extended" type='submit' sx={{ margin: "1rem" }} style={{backgroundColor: theme.palette.primary.light}}>
+                    <Fab variant="extended" type='submit' sx={{ margin: "1rem" }} style={{ backgroundColor: theme.palette.primary.light }}>
                         <CreateIcon sx={{ mr: 2 }} />
                         Create
                     </Fab>
